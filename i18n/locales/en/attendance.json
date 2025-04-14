@@ -1,0 +1,16 @@
+{
+    "attendance": {
+    "search": "Search",
+    "id": "ID",
+    "name": "EMployee Name",
+    "getToWork": "Get to Work",
+    "outOfOffice": "Out of Office",
+    "reenterOffice": "Reenter the Office",
+    "backToWork": "Back to Work",
+    "presence": "Status",
+    "nonCompliance": "Type Non-compliance",
+    "action": "Action",
+    "update": "Update",
+    "recordsPerPage": "Records Per Page"
+  }
+}
