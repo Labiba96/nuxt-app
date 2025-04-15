@@ -57,8 +57,7 @@
       <DxSelection mode="multiple" />
 
       <DxPaging :enabled="true" :page-size="5" />
-      
-      
+
       <DxPager
         :show-page-size-selector="true"
         :allowed-page-sizes="[5, 10, 15, 20]"
@@ -66,7 +65,6 @@
         :show-navigation-buttons="true"
       />
 
-      
       <DxColumn dataField="id" :caption="$t('attendance.id')" />
       <DxColumn dataField="employeeName" :caption="$t('attendance.name')" />
 
@@ -194,6 +192,7 @@ import { storeToRefs } from "pinia";
 import { ref, onMounted } from "vue";
 import { exportDataGrid } from "devextreme/excel_exporter";
 import ExcelJS from "exceljs";
+import saveAs from "file-saver";
 
 const search = ref({
   id: "",
@@ -314,13 +313,8 @@ const handleFileUpload = (event: Event) => {
   const fileInput = event.target as HTMLInputElement;
   const file = fileInput.files?.[0];
   if (file) {
-    console.log("File selected:", file.name);
   }
 };
-
-function saveAs(arg0: Blob, arg1: string) {
-  throw new Error("Function not implemented.");
-}
 </script>
 
 <style scoped>
