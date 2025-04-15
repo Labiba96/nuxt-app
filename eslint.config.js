@@ -2,17 +2,18 @@ import vue from "eslint-plugin-vue";
 import vueParser from "vue-eslint-parser";
 import unusedImports from "eslint-plugin-unused-imports";
 import tseslint from "@typescript-eslint/eslint-plugin";
+import tsParser from "@typescript-eslint/parser";
 
 export default [
   {
     ignores: [".nuxt/**/*"],
   },
   {
-    files: ["**/*.vue"],
+    files: ["**/*.vue", "**/*.ts", "**/*.tsx"],
     languageOptions: {
       parser: vueParser,
       parserOptions: {
-        parser: "@typescript-eslint/parser",
+        parser: tsParser,
         ecmaVersion: 2020,
         sourceType: "module",
       },
