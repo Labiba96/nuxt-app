@@ -69,4 +69,3 @@ const emit = defineEmits<{
 
 // const emit = defineEmits(["onView", "onCancel"]);
 </script>
-
