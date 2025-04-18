@@ -27,7 +27,7 @@
 
     <DxColumn
       type="buttons"
-      :caption="$t('declarations.actions')"
+      :caption="$t('declarations.action')"
       width="150"
       :buttons="[
         {
