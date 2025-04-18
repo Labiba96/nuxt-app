@@ -3,12 +3,12 @@
     <!-- Search Panel -->
     <SearchPanel :criteria="searchCriteria" @search="applySearch" @reset="resetSearch" />
 
-    <!-- Title and Export Buttons -->
+    <!-- Print and Export Buttons -->
     <div class="flex justify-between items-center mb-4">
       <h2 class="font-semibold text-xl">List of Declarations of Official Business</h2>
       <div class="flex gap-2">
-        <DxButton text="Print" icon="print" @click="printTable" />
-        <DxButton text="Export" icon="export" @click="exportTable" />
+        <DxButton text="Print" icon="print" @click="handlePrint" />
+        <DxButton text="Export" icon="export" @click="handleExport" />
       </div>
     </div>
 
@@ -21,7 +21,7 @@
       />
     </div>
 
-    <!-- Cancel Form Popup -->
+    <!-- End Form Popup -->
     <DxPopup
       v-model:visible="cancelPopup"
       title="Official Business Declaration Information"
@@ -119,7 +119,7 @@
       </div>
     </DxPopup>
 
-    <!-- Confirmation Popup Alternative -->
+    <!-- Confirmation Popup Cancel -->
     <DxPopup
       v-model:visible="confirmPopupAl"
       title="End of Declaration of Official Business"
@@ -135,7 +135,7 @@
       </div>
     </DxPopup>
 
-    <!-- Cancel Form Alternative Popup -->
+    <!-- Cancel Form Popup -->
     <DxPopup
       v-model:visible="cancelPopupAl"
       title="Official Business Declaration Information"
@@ -199,6 +199,41 @@ import { useDeclarationStore } from "@/stores/hdr-mk";
 import { computed } from "vue";
 import SearchPanel from "./components/search-panel.vue";
 import DeclarationTable from "./components/table.vue";
+import { useTableUtilities } from "@/composables/useTableUtilities";
+
+const { printTable, exportTable } = useTableUtilities();
+
+const handlePrint = () => {
+  printTable("print-section");
+};
+
+const handleExport = () => {
+  const headers = [
+    "ID",
+    "Competency Owner",
+    "IC No.",
+    "Type",
+    "Number",
+    "Location",
+    "Start Date",
+    "End Date",
+    "Status",
+  ];
+
+  const data = filteredDeclarations.value.map((row) => [
+    row.id,
+    row.competencyOwner,
+    row.identityCardNo,
+    row.typeOfficialAffairs,
+    row.numberOfficialAffairs,
+    row.location,
+    row.startDate,
+    row.endDate,
+    row.statusRecord,
+  ]);
+
+  exportTable(data, headers, "declarations.csv");
+};
 
 const store = useDeclarationStore();
 const declarations = computed(() => store.declarations);
@@ -215,8 +250,6 @@ const searchCriteria = reactive({
   type: "",
   businessName: "",
 });
-
-const typeOptions = ["Official Visit", "Training", "Meeting", "Others"];
 
 const filteredDeclarations = computed(() => {
   return declarations.value.filter((item) => {
@@ -237,56 +270,6 @@ const resetSearch = () => {
   searchCriteria.applicationRef = "";
   searchCriteria.type = "";
   searchCriteria.businessName = "";
-};
-
-const printTable = () => {
-  const content = document.getElementById("print-section")?.innerHTML;
-  const printWindow = window.open("", "", "height=600,width=800");
-  if (printWindow && content) {
-    printWindow.document.write("<html><head><title>Print</title></head><body>");
-    printWindow.document.write(content);
-    printWindow.document.write("</body></html>");
-    printWindow.document.close();
-    printWindow.print();
-  }
-};
-
-const exportTable = () => {
-  const csv = [
-    [
-      "ID",
-      "Competency Owner",
-      "IC No.",
-      "Type",
-      "Number",
-      "Location",
-      "Start Date",
-      "End Date",
-      "Status",
-    ],
-    ...filteredDeclarations.value.map((row) => [
-      row.id,
-      row.competencyOwner,
-      row.identityCardNo,
-      row.typeOfficialAffairs,
-      row.numberOfficialAffairs,
-      row.location,
-      row.startDate,
-      row.endDate,
-      row.statusRecord,
-    ]),
-  ]
-    .map((e) => e.join(","))
-    .join("\n");
-
-  const blob = new Blob([csv], { type: "text/csv;charset=utf-8;" });
-  const url = URL.createObjectURL(blob);
-  const link = document.createElement("a");
-  link.setAttribute("href", url);
-  link.setAttribute("download", "declarations.csv");
-  document.body.appendChild(link);
-  link.click();
-  document.body.removeChild(link);
 };
 
 const form = reactive({
