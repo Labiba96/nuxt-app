@@ -15,7 +15,6 @@
       <DxPager
         :visible="true"
         :allowed-page-sizes="pageSizes"
-        :display-mode="displayMode"
         :show-page-size-selector="showPageSizeSelector"
         :show-info="showInfo"
         :show-navigation-buttons="showNavButtons"
@@ -40,15 +39,22 @@
 
 <script setup lang="ts">
 import { onMounted } from "vue";
-import { DxDataGrid, DxColumn, DxEditing, DxSearchPanel,   DxPager,
-  DxPaging, } from "devextreme-vue/data-grid";
+import {
+  DxDataGrid,
+  DxColumn,
+  DxEditing,
+  DxSearchPanel,
+  DxPager,
+  DxPaging,
+} from "devextreme-vue/data-grid";
 import { useEmployeeStore } from "@/stores/useEmployeeStore";
 import { ref } from "vue";
 import { DxPopup } from "devextreme-vue/data-grid";
+import { type PagerPageSize } from "devextreme-vue/common/grids";
 
 const popupTitle = ref("Employee Form");
 
-const pageSizes: (number | PagerPageSize)[] = [5, 10, 'all'];
+const pageSizes: (number | PagerPageSize)[] = [5, 10, "all"];
 const showPageSizeSelector = ref(true);
 const showInfo = ref(true);
 const showNavButtons = ref(true);

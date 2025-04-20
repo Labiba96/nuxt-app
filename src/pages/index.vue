@@ -6,5 +6,5 @@
 </template>
 
 <script setup lang="ts">
-import EditableGrid from '@/components/EditableGrid.vue'
+import EditableGrid from "@/components/EditableGrid.vue";
 </script>
