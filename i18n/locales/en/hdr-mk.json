@@ -1,0 +1,26 @@
+{
+  "declarations": {
+    "searchDeclarationTitle": "Search for Declaration of Official Affairs",
+    "applicationReferenceNo": "Application Reference No.",
+    "typeOfOfficialBusiness": "Type of Official Business",
+    "officialBusinessName": "Official Business Name",
+    "pleaseSelect": "Please Select",
+    "search": "Search",
+    "reset": "Reset",
+    "listOfDeclarationsTitle": "List of Declarations of Official Business",
+    "print": "Print",
+    "export": "Export",
+    "id": "ID",
+    "competencyOwner": "Number Competency Owner",
+    "identityCardNo": "Identity Card No.",
+    "typeOfficialAffairs": "Type Official Affairs",
+    "numberOfficialAffairs": "Number Official Affairs",
+    "location": "Location",
+    "startDate": "Start Date",
+    "endDate": "End Date",
+    "statusRecord": "Status Record",
+    "action": "Action",
+    "viewDeclaration": "View Declaration",
+    "cancelDeclaration": "Cancel Declaration"
+  }
+}
