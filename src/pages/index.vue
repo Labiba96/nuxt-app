@@ -1,10 +1,10 @@
 <template>
-  <div>
-    <h1>{{ $t("about.title") }}</h1>
-    <p>{{ $t("description") }}</p>
+  <div class="p-6">
+    <h1 class="text-2xl font-bold mb-4">Employee List</h1>
+    <EditableGrid />
   </div>
 </template>
 
-<script setup lang="ts"></script>
-
-<style scoped></style>
+<script setup lang="ts">
+import EditableGrid from "@/components/EditableGrid.vue";
+</script>
